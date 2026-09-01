@@ -1,26 +1,248 @@
 @import "tailwindcss";
 
+/*
+  Sprynt40 design tokens — light-first digital growth system.
+  Light, airy surfaces carry the site; orange (straight from the Sprynt40
+  logo mark) is the primary accent, with cyan used as a minor supporting
+  tone. `--palette-violet` / the `text-violet` etc. utilities it powers are
+  a naming holdover from an earlier violet-led pass — they now resolve to
+  the same brand orange as `--accent`, so any leftover `-violet` class in
+  older code still renders on-brand without needing a rename everywhere.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --palette-dark: oklch(15.5% 0.004 285);
+  --palette-dark-2: oklch(19.5% 0.005 285);
+  --palette-light: oklch(99.1% 0 0);
+  --palette-light-2: oklch(96.6% 0.001 286);
+  --palette-ink-on-dark: oklch(97% 0.001 286);
+  --palette-ink-on-light: oklch(17% 0.005 285);
+  --palette-violet: oklch(67% 0.2 41);
+
+  /* Sprynt40 logo orange — slightly brighter on dark grounds. */
+  --accent-solid: oklch(67% 0.2 41);
+  --accent-bright: oklch(72% 0.19 45);
+
+  /* semantic — LIGHT is the default theme */
+  --surface: var(--palette-light);
+  --surface-2: var(--palette-light-2);
+  --ink: var(--palette-ink-on-light);
+  --ink-muted: color-mix(in oklab, var(--palette-ink-on-light) 58%, transparent);
+  --line: color-mix(in oklab, var(--palette-ink-on-light) 11%, transparent);
+  --accent: var(--accent-solid);
+  --accent-ink: oklch(99% 0 0);
+}
+
+[data-theme="dark"] {
+  --surface: var(--palette-dark);
+  --surface-2: var(--palette-dark-2);
+  --ink: var(--palette-ink-on-dark);
+  --ink-muted: color-mix(in oklab, var(--palette-ink-on-dark) 64%, transparent);
+  --line: color-mix(in oklab, var(--palette-ink-on-dark) 13%, transparent);
+  --accent: var(--accent-bright);
+  --accent-ink: oklch(99% 0 0);
+}
+
+/* explicit light scope (sections inside dark parents) */
+[data-theme="light"] {
+  --surface: var(--palette-light);
+  --surface-2: var(--palette-light-2);
+  --ink: var(--palette-ink-on-light);
+  --ink-muted: color-mix(in oklab, var(--palette-ink-on-light) 58%, transparent);
+  --line: color-mix(in oklab, var(--palette-ink-on-light) 11%, transparent);
+  --accent: var(--accent-solid);
+  --accent-ink: oklch(99% 0 0);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-violet: var(--palette-violet);
+  --color-base-dark: var(--palette-dark);
+  --color-base-light: var(--palette-light);
+
+  --font-display: var(--font-display-face);
+  --font-sans: var(--font-inter);
+
+  /* fluid type scale — tuned for the bold grotesk display face */
+  --text-hero: clamp(2.6rem, 1.2rem + 6.8vw, 7.25rem);
+  --text-hero--line-height: 1.0;
+  --text-hero--letter-spacing: -0.03em;
+  --text-display: clamp(2rem, 1rem + 4vw, 4.75rem);
+  --text-display--line-height: 1.04;
+  --text-display--letter-spacing: -0.02em;
+  --text-title: clamp(1.4rem, 1.05rem + 1.7vw, 2.5rem);
+  --text-title--line-height: 1.12;
+  --text-title--letter-spacing: -0.01em;
+  --text-lead: clamp(1.05rem, 0.95rem + 0.5vw, 1.3rem);
+  --text-lead--line-height: 1.55;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.14em;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* film-grain overlay — apply to a positioned (dark) section */
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 }
 
+/* dark cards lit from above */
+@utility card-lit {
+  box-shadow:
+    inset 0 12px 24px 0 rgb(255 255 255 / 0.03),
+    inset 0 0.5px 0.5px 0 rgb(255 255 255 / 0.07),
+    inset 0 0.25px 0.25px 0 rgb(255 255 255 / 0.14),
+    0 48px 72px -12px rgb(0 0 0 / 0.28),
+    0 32px 44px -12px rgb(0 0 0 / 0.34);
+}
+
+/* light cards — huge ultra-soft layered shadows */
+@utility card-soft {
+  box-shadow:
+    0 48px 72px -12px rgb(0 0 0 / 0.04),
+    0 32px 44px -12px rgb(0 0 0 / 0.05),
+    0 2px 6px 0 rgb(0 0 0 / 0.05);
+}
+
+/* gradient hairline — transparent → line → transparent */
+@utility hairline-x {
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    var(--line) 20%,
+    var(--line) 80%,
+    transparent
+  );
+  height: 1px;
+}
+
+/* seamless infinite-scroll track for Marquee (duplicated children, -50%) */
+@utility animate-marquee {
+  animation: marquee-scroll linear infinite;
+}
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/*
+  Pure-CSS word-mask reveal for the hero headline — the one piece of content
+  every visitor must see with zero scroll and zero dependency on JS/Motion
+  effects successfully attaching after hydration (some browser extensions
+  mutate the DOM before hydration and can prevent React effects from ever
+  running on a subtree, which would otherwise leave a JS-driven reveal stuck
+  at its "hidden" transform forever). Runs off the stylesheet alone.
+*/
+@utility mask-reveal-word {
+  animation: mask-reveal-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+@keyframes mask-reveal-up {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@utility hero-banner-kenburns {
+  animation: hero-banner-kenburns 11s cubic-bezier(0.16, 1, 0.3, 1) both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+@keyframes hero-banner-kenburns {
+  from {
+    transform: scale(1.08) translate3d(-1.5%, 1.5%, 0);
+  }
+  to {
+    transform: scale(1.01) translate3d(0, 0, 0);
+  }
+}
+
+/* subtle diagonal shine sweep for the primary CTA (accent Button) */
+@utility btn-shine {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      115deg,
+      transparent 30%,
+      rgb(255 255 255 / 0.35) 45%,
+      transparent 60%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  &:hover::after {
+    transform: translateX(120%);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    &::after {
+      display: none;
+    }
+  }
+}
+
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.6s ease, color 0.6s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent-solid);
+  color: oklch(99% 0 0);
+}
+
+/*
+  Sections/footers paint their own themed surface; other [data-theme] hosts
+  (header, inverted cards) only re-scope the tokens and choose their own
+  background classes.
+*/
+section[data-theme],
+footer[data-theme] {
+  background: var(--surface);
+  color: var(--ink);
+  transition: background-color 0.6s ease, color 0.6s ease;
+}
+header[data-theme] {
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

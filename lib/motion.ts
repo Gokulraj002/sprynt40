@@ -11,8 +11,26 @@ export const STAGGER = 0.06;
 export const springPremium: Transition = { type: "spring", stiffness: 120, damping: 20, mass: 1 };
 export const springSnappy: Transition = { type: "spring", stiffness: 300, damping: 24, mass: 0.6 };
 
-/** viewport config for whileInView reveals */
-export const viewportOnce = { once: true, amount: 0.3 } as const;
+/*
+  Viewport config for whileInView reveals.
+
+  `amount` MUST stay height-independent: it maps to an IntersectionObserver
+  threshold (intersected area / element area), so any percentage-based amount
+  is unsatisfiable for an element taller than the viewport — the ratio caps out
+  at viewportH / elementH. A prior `amount: 0.3` silently hid the homepage
+  service catalog on mobile, where the 1-column grid is ~4600px tall (max ratio
+  ~0.18) so the parent never reached "visible" and, via `when: "beforeChildren"`,
+  none of its 15 cards ever animated in.
+
+  `amount: "some"` fires as soon as any part intersects; the negative bottom
+  margin keeps the intended "reveal just after it enters" feel without ever
+  depending on how tall the element is.
+*/
+export const viewportOnce = {
+  once: true,
+  amount: "some",
+  margin: "0px 0px -80px 0px",
+} as const;
 
 export const fadeUp: Variants = {
   hidden: { opacity: 0, y: 20 },

@@ -18,7 +18,7 @@ const toneClass: Record<Tone, { text: string; chip: string; glow: string; dot: s
   violet: {
     text: "text-violet",
     chip: "border-violet/20 bg-violet/10 text-violet",
-    glow: "from-violet/25 via-fuchsia-200/35 to-cyan-100/50",
+    glow: "from-orange-200/45 via-orange-50/60 to-cyan-100/50",
     dot: "bg-violet",
   },
   emerald: {
@@ -36,7 +36,7 @@ const toneClass: Record<Tone, { text: string; chip: string; glow: string; dot: s
   cyan: {
     text: "text-cyan-700",
     chip: "border-cyan-200 bg-cyan-50 text-cyan-800",
-    glow: "from-cyan-200/45 via-violet-100/40 to-white",
+    glow: "from-cyan-200/45 via-orange-100/45 to-white",
     dot: "bg-cyan-500",
   },
 };
@@ -148,7 +148,7 @@ export function PageHero({
       theme="light"
       className={cn(
         "overflow-hidden pt-28 pb-14 sm:pt-32 sm:pb-18 lg:pt-36 lg:pb-20",
-        "bg-[radial-gradient(circle_at_15%_10%,rgba(139,92,246,0.14),transparent_32%),linear-gradient(180deg,#ffffff_0%,#f8fbff_62%,#ffffff_100%)]",
+        "bg-[radial-gradient(circle_at_15%_10%,rgba(249,115,22,0.13),transparent_32%),linear-gradient(180deg,#ffffff_0%,#f8fbff_62%,#ffffff_100%)]",
       )}
     >
       <Container className="grid items-center gap-10 lg:grid-cols-[0.98fr_1.02fr] lg:gap-16">
@@ -192,7 +192,7 @@ export function PageHero({
         </div>
 
         {visual !== "none" && (
-          <div className="relative min-h-[360px] overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/80 p-4 shadow-[0_30px_90px_-45px_rgba(76,29,149,0.5)] backdrop-blur">
+          <div className="relative min-h-[360px] overflow-hidden rounded-[1.75rem] border border-orange-100 bg-white/80 p-4 shadow-[0_30px_90px_-45px_rgba(124,45,18,0.45)] backdrop-blur">
             <div className={cn("absolute inset-0 bg-gradient-to-br", toneStyles.glow)} />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.055)_1px,transparent_1px)] bg-[size:34px_34px]" />
             {visual === "image" && image && <ImageBannerVisual image={image} dotClass={toneStyles.dot} />}

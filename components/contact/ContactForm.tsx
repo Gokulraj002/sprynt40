@@ -56,7 +56,7 @@ function ChipGrid({
   name: string;
 }) {
   return (
-    <div role="group" aria-label={name} className="flex flex-wrap gap-2.5">
+    <div role="group" aria-label={name} className="flex min-w-0 flex-wrap gap-2.5">
       {options.map((option) => {
         const selected = value === option;
         return (
@@ -66,7 +66,7 @@ function ChipGrid({
             aria-pressed={selected}
             onClick={() => onChange(option)}
             className={cn(
-              "min-h-11 rounded-full border px-4 py-2.5 text-sm font-medium tracking-tight transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
+              "min-h-11 max-w-full whitespace-normal rounded-full border px-4 py-2.5 text-center text-sm font-medium tracking-tight transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
               selected
                 ? "border-accent bg-accent text-accent-ink"
                 : "border-line bg-surface text-ink hover:border-ink/40",
@@ -124,7 +124,7 @@ export function ContactForm() {
 
   if (state.ok) {
     return (
-      <div className="rounded-[1.5rem] border border-violet/15 bg-white p-6 shadow-[0_24px_70px_-45px_rgba(76,29,149,0.45)] sm:p-8">
+      <div className="w-full max-w-[calc(100vw-2.5rem)] min-w-0 overflow-hidden rounded-[1.5rem] border border-orange-100 bg-white p-6 shadow-[0_24px_70px_-45px_rgba(124,45,18,0.42)] sm:max-w-none sm:p-8">
         <p className="font-display text-title font-medium text-balance">
           {state.message ?? "Got it — we'll reply within one working day."}
         </p>
@@ -152,7 +152,7 @@ export function ContactForm() {
   return (
     <form
       action={formAction}
-      className="rounded-[1.5rem] border border-violet/15 bg-white p-6 shadow-[0_24px_70px_-45px_rgba(76,29,149,0.45)] sm:p-8"
+      className="w-full max-w-[calc(100vw-2.5rem)] min-w-0 overflow-hidden rounded-[1.5rem] border border-orange-100 bg-white p-6 shadow-[0_24px_70px_-45px_rgba(124,45,18,0.42)] sm:max-w-none sm:p-8"
     >
       {/* Honeypot — real inputs are visually hidden bots may still skip
           display:none, so this uses off-screen positioning instead. */}
@@ -206,7 +206,7 @@ export function ContactForm() {
               animate="visible"
               exit="exit"
             >
-              <h2 className="font-display text-title font-medium text-balance">
+              <h2 className="break-words font-display text-title font-medium text-balance">
                 What do you need help with?
               </h2>
               <p className="mt-2 text-sm text-ink-muted">Pick the closest match — we&apos;ll dig into specifics on the call.</p>
@@ -234,7 +234,7 @@ export function ContactForm() {
               animate="visible"
               exit="exit"
             >
-              <h2 className="font-display text-title font-medium text-balance">
+              <h2 className="break-words font-display text-title font-medium text-balance">
                 Project budget range?
               </h2>
               <p className="mt-2 text-sm text-ink-muted">Roughly is fine — this just shapes the plan we bring to the call.</p>
@@ -262,7 +262,7 @@ export function ContactForm() {
               animate="visible"
               exit="exit"
             >
-              <h2 className="font-display text-title font-medium text-balance">
+              <h2 className="break-words font-display text-title font-medium text-balance">
                 Where should we send it?
               </h2>
               <p className="mt-2 text-sm text-ink-muted">Name plus one way to reach you — email or WhatsApp/phone.</p>

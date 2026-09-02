@@ -93,10 +93,10 @@ export function BigCta() {
   return (
     <Section
       theme="light"
-      className="overflow-hidden bg-[linear-gradient(135deg,#f5f3ff_0%,#ecfeff_48%,#fff7ed_100%)] py-20 sm:py-28 lg:py-36"
+      className="overflow-hidden bg-[linear-gradient(135deg,#fff8ef_0%,#ecfeff_48%,#fff7ed_100%)] py-20 sm:py-28 lg:py-36"
     >
       <Container>
-        <div className="relative overflow-hidden rounded-[1.75rem] border border-white/80 bg-white/70 p-8 shadow-[0_28px_90px_-45px_rgba(76,29,149,0.48)] backdrop-blur sm:p-12 lg:p-16">
+        <div className="relative overflow-hidden rounded-[1.75rem] border border-orange-100 bg-white/72 p-8 shadow-[0_28px_90px_-45px_rgba(124,45,18,0.48)] backdrop-blur sm:p-12 lg:p-16">
           <div className="absolute inset-0 bg-[linear-gradient(rgba(15,23,42,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(15,23,42,0.05)_1px,transparent_1px)] bg-[size:36px_36px]" />
           <div className="relative max-w-4xl">
           <motion.p

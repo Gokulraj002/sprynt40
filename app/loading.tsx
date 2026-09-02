@@ -5,7 +5,7 @@ export default function Loading() {
   return (
     <div
       data-theme="light"
-      className="flex min-h-dvh flex-col items-center justify-center gap-8 bg-[linear-gradient(135deg,#f5f3ff_0%,#ecfeff_55%,#fff7ed_100%)]"
+      className="flex min-h-dvh flex-col items-center justify-center gap-8 bg-[linear-gradient(135deg,#fff8ef_0%,#ecfeff_55%,#fff7ed_100%)]"
     >
       <p className="animate-pulse font-display text-title font-medium text-ink motion-reduce:animate-none">
         {site.wordmark}

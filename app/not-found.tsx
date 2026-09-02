@@ -17,7 +17,7 @@ export default function NotFound() {
   return (
     <Section
       theme="light"
-      className="flex min-h-svh items-center bg-[linear-gradient(135deg,#f5f3ff_0%,#ecfeff_55%,#fff7ed_100%)] pt-32 pb-24"
+      className="flex min-h-svh items-center bg-[linear-gradient(135deg,#fff8ef_0%,#ecfeff_55%,#fff7ed_100%)] pt-32 pb-24"
     >
       <Container>
         <div className="mx-auto max-w-3xl text-center">

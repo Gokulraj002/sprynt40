@@ -128,13 +128,13 @@ export function NavOverlay({
           initial="hidden"
           animate="visible"
           exit="exit"
-          className="fixed inset-0 z-[90] flex flex-col bg-surface pt-24 sm:pt-28"
+          className="fixed inset-0 z-[90] flex flex-col bg-[linear-gradient(180deg,#ffffff_0%,#fff8ef_58%,#eefbff_100%)] pt-20 sm:pt-28"
         >
           <h2 id={labelId} className="sr-only">
             Site navigation
           </h2>
 
-          <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-between px-5 pb-10 sm:px-8">
+          <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col justify-between px-5 pb-8 sm:px-8 sm:pb-10">
             <motion.nav
               variants={reducedMotion ? linksParentReduced : linksParent}
               initial="hidden"
@@ -154,7 +154,7 @@ export function NavOverlay({
                         onClick={onClose}
                         aria-current={isActive ? "page" : undefined}
                         className={cn(
-                          "block rounded-sm py-2 font-display text-[clamp(2.25rem,9vw,4.5rem)] leading-[1.05] tracking-tight transition-colors duration-300 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent",
+                          "block rounded-sm py-1.5 font-display text-[clamp(2rem,12vw,4.5rem)] font-semibold leading-[1.04] tracking-normal transition-colors duration-300 hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:py-2",
                           isActive ? "text-accent" : "text-ink",
                         )}
                       >
@@ -168,7 +168,7 @@ export function NavOverlay({
 
             <motion.div
               variants={reducedMotion ? rowReduced : maskUp}
-              className="flex flex-wrap items-center justify-between gap-6 border-t border-line pt-6"
+              className="flex flex-col items-stretch gap-5 border-t border-orange-100 pt-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:pt-6"
             >
               <Button
                 href={waLink("Hi! I want to talk about growth.")}
@@ -177,7 +177,7 @@ export function NavOverlay({
               >
                 {hasWhatsApp ? "Message us" : "Start a project"}
               </Button>
-              <ul className="flex items-center gap-5">
+              <ul className="flex flex-wrap items-center gap-x-5 gap-y-3">
                 {site.socials.map((social) => (
                   <li key={social.href}>
                     <a

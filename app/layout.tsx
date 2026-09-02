@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { spaceGrotesk, inter } from "./fonts";
+import { inter } from "./fonts";
 import { site } from "@/lib/data/site";
 import { OrgJsonLd } from "@/lib/jsonld";
 import SmoothScroll from "@/components/fx/SmoothScroll";
@@ -31,7 +31,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${spaceGrotesk.variable} ${inter.variable}`}
+      className={inter.variable}
     >
       <body>
         <OrgJsonLd />

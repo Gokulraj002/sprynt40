@@ -44,7 +44,7 @@ export function Logo({
           {site.name}
         </span>
         {withTagline && (
-          <span className="mt-1 block text-xs font-medium text-ink-muted">
+          <span data-logo-tagline className="mt-1 block text-xs font-medium text-ink-muted">
             {site.tagline}
           </span>
         )}

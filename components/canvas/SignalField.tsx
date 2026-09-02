@@ -6,7 +6,7 @@ import * as THREE from "three";
 
 // Three.js materials need real color values, not CSS custom properties.
 const MUTED_GREY = "#a1a1aa"; // zinc-400 — visible on the light hero
-const ACCENT_VIOLET = "#8b5cf6";
+const ACCENT_ORANGE = "#f97316";
 const ACCENT_RATIO = 0.08;
 
 const POINT_COUNT = 3600;
@@ -51,7 +51,7 @@ function SignalPoints() {
     const seeds = new Float32Array(POINT_COUNT);
 
     const grey = new THREE.Color(MUTED_GREY);
-    const accent = new THREE.Color(ACCENT_VIOLET);
+    const accent = new THREE.Color(ACCENT_ORANGE);
     const random = seededRandom(42);
 
     for (let i = 0; i < POINT_COUNT; i++) {

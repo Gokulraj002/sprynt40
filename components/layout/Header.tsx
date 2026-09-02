@@ -34,6 +34,7 @@ export function Header() {
 
   const { scrollY } = useScroll();
   const pathname = usePathname();
+  const headerTheme = mobileOpen ? "light" : surfaceTheme;
 
   // Close the mobile overlay whenever the route changes (e.g. a social link
   // or programmatic navigation), not just on direct nav-link clicks.
@@ -81,22 +82,22 @@ export function Header() {
     <>
       <motion.header
         ref={headerRef}
-        data-theme={surfaceTheme}
+        data-theme={headerTheme}
         className={cn(
           "fixed inset-x-0 top-0 z-[100] transition-[background-color,border-color,box-shadow] duration-300",
-          surfaceTheme === "dark"
-            ? "border-b border-white/10 bg-black/35 text-white shadow-[0_18px_60px_-44px_rgba(0,0,0,0.95)] backdrop-blur-xl"
+          headerTheme === "dark"
+            ? "border-b border-white/10 bg-black/55 text-white shadow-[0_18px_60px_-44px_rgba(0,0,0,0.95)] backdrop-blur-xl"
             : scrolled
-              ? "border-b border-line bg-white/85 shadow-sm backdrop-blur-xl"
-              : "border-b border-transparent bg-white/60 backdrop-blur-md",
+              ? "border-b border-line bg-white/92 shadow-sm backdrop-blur-xl"
+              : "border-b border-orange-100/70 bg-white/78 backdrop-blur-xl",
         )}
       >
         <div className="relative z-[110]">
-          <Container className="flex h-16 items-center justify-between sm:h-20">
+          <Container className="flex h-14 items-center justify-between sm:h-20">
             <Logo
               withTagline
               onClick={() => setMobileOpen(false)}
-              className="[&_svg]:size-7 sm:[&_svg]:size-9"
+              className="[&_svg]:size-7 [&_[data-logo-tagline]]:hidden sm:[&_svg]:size-9 sm:[&_[data-logo-tagline]]:block"
             />
 
             <nav
@@ -144,7 +145,12 @@ export function Header() {
               aria-controls={PANEL_ID}
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               onClick={() => setMobileOpen((open) => !open)}
-              className="relative flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:hidden"
+              className={cn(
+                "relative flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full border shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:hidden",
+                headerTheme === "dark"
+                  ? "border-white/18 bg-white/12"
+                  : "border-orange-100 bg-white/88",
+              )}
             >
               <motion.span
                 animate={

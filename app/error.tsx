@@ -24,7 +24,7 @@ export default function Error({
   return (
     <div
       data-theme="light"
-      className="relative flex min-h-dvh flex-col items-center justify-center bg-[linear-gradient(135deg,#f5f3ff_0%,#ecfeff_55%,#fff7ed_100%)] text-center"
+      className="relative flex min-h-dvh flex-col items-center justify-center bg-[linear-gradient(135deg,#fff8ef_0%,#ecfeff_55%,#fff7ed_100%)] text-center"
     >
       <Container>
         <p className="text-label font-sans uppercase text-ink-muted">Error</p>

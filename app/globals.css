@@ -2,12 +2,9 @@
 
 /*
   Sprynt40 design tokens — light-first digital growth system.
-  Light, airy surfaces carry the site; orange (straight from the Sprynt40
-  logo mark) is the primary accent, with cyan used as a minor supporting
-  tone. `--palette-violet` / the `text-violet` etc. utilities it powers are
-  a naming holdover from an earlier violet-led pass — they now resolve to
-  the same brand orange as `--accent`, so any leftover `-violet` class in
-  older code still renders on-brand without needing a rename everywhere.
+  Sprynt40 uses one standard type family everywhere. Orange from the logo mark
+  is the primary accent; cyan is a small secondary support color. The legacy
+  `violet` token name remains as an orange alias for older component classes.
 */
 :root {
   --palette-dark: oklch(15.5% 0.004 285);
@@ -65,24 +62,24 @@
   --color-base-dark: var(--palette-dark);
   --color-base-light: var(--palette-light);
 
-  --font-display: var(--font-display-face);
+  --font-display: var(--font-inter);
   --font-sans: var(--font-inter);
 
-  /* fluid type scale — tuned for the bold grotesk display face */
+  /* fluid type scale — same family, clear hierarchy */
   --text-hero: clamp(2.6rem, 1.2rem + 6.8vw, 7.25rem);
   --text-hero--line-height: 1.0;
-  --text-hero--letter-spacing: -0.03em;
+  --text-hero--letter-spacing: 0;
   --text-display: clamp(2rem, 1rem + 4vw, 4.75rem);
   --text-display--line-height: 1.04;
-  --text-display--letter-spacing: -0.02em;
+  --text-display--letter-spacing: 0;
   --text-title: clamp(1.4rem, 1.05rem + 1.7vw, 2.5rem);
   --text-title--line-height: 1.12;
-  --text-title--letter-spacing: -0.01em;
+  --text-title--letter-spacing: 0;
   --text-lead: clamp(1.05rem, 0.95rem + 0.5vw, 1.3rem);
   --text-lead--line-height: 1.55;
   --text-label: 0.75rem;
   --text-label--line-height: 1.2;
-  --text-label--letter-spacing: 0.14em;
+  --text-label--letter-spacing: 0.08em;
 }
 
 /* film-grain overlay — apply to a positioned (dark) section */

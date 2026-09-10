@@ -1,7 +1,8 @@
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 
-export const inter = Inter({
+export const poppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-poppins",
   display: "swap",
 });

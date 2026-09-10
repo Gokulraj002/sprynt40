@@ -7,17 +7,19 @@
   `violet` token name remains as an orange alias for older component classes.
 */
 :root {
-  --palette-dark: oklch(15.5% 0.004 285);
-  --palette-dark-2: oklch(19.5% 0.005 285);
-  --palette-light: oklch(99.1% 0 0);
+  /* Sprynt40 brand — exact HEX from the brand guide. */
+  --palette-dark: #000000;               /* Rich Black — background on dark */
+  --palette-dark-2: #0a0a0a;             /* subtle lift off pure black */
+  --palette-light: #ffffff;              /* Pure White — text on dark, light bg */
   --palette-light-2: oklch(96.6% 0.001 286);
-  --palette-ink-on-dark: oklch(97% 0.001 286);
-  --palette-ink-on-light: oklch(17% 0.005 285);
-  --palette-violet: oklch(67% 0.2 41);
+  --palette-ink-on-dark: #ffffff;
+  --palette-ink-on-light: #000000;
+  --palette-tagline: #cccccc;            /* Light Gray — tagline / secondary on dark */
+  --palette-violet: #f97604;
 
-  /* Sprynt40 logo orange — slightly brighter on dark grounds. */
-  --accent-solid: oklch(67% 0.2 41);
-  --accent-bright: oklch(72% 0.19 45);
+  /* Sprynt40 logo orange (#F97604) — slightly brighter on dark grounds. */
+  --accent-solid: #f97604;
+  --accent-bright: #ff8a1f;
 
   /* semantic — LIGHT is the default theme */
   --surface: var(--palette-light);
@@ -62,8 +64,8 @@
   --color-base-dark: var(--palette-dark);
   --color-base-light: var(--palette-light);
 
-  --font-display: var(--font-inter);
-  --font-sans: var(--font-inter);
+  --font-display: var(--font-poppins);
+  --font-sans: var(--font-poppins);
 
   /* fluid type scale — same family, clear hierarchy */
   --text-hero: clamp(2.6rem, 1.2rem + 6.8vw, 7.25rem);
@@ -212,7 +214,7 @@ html {
 body {
   background: var(--surface);
   color: var(--ink);
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   overflow-x: hidden;
   transition: background-color 0.6s ease, color 0.6s ease;
   -webkit-font-smoothing: antialiased;

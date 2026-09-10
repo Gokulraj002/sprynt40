@@ -143,7 +143,7 @@ export default async function CaseStudyPage({ params }: PageProps) {
         </Container>
       </Section>
 
-      <Section theme="light" className="bg-[#f8fbff]">
+      <Section theme="light">
         <Container>
           <div className="flex flex-col items-start gap-12 border-t border-line pt-16 sm:flex-row sm:items-end sm:justify-between">
             <Link

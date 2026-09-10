@@ -63,7 +63,7 @@ export function SignalControlRoom() {
         <Container>
           <div className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-16">
             <div className="min-w-0">
-              <p className="text-sm font-semibold uppercase text-orange-700">
+              <p className="text-sm font-semibold uppercase text-accent">
                 Why we exist
               </p>
               <h2 className="mt-3 font-display text-[clamp(2rem,4vw,3.6rem)] font-semibold leading-tight text-ink text-balance">
@@ -87,7 +87,7 @@ export function SignalControlRoom() {
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {principles.map((principle) => (
               <div key={principle} className="border-t border-line pt-5">
-                <span className="mb-4 block size-2 rounded-full bg-orange-500" />
+                <span className="mb-4 block size-2 rounded-full bg-accent" />
                 <p className="text-sm font-medium leading-6 text-ink">
                   {principle}
                 </p>
@@ -97,11 +97,11 @@ export function SignalControlRoom() {
         </Container>
       </section>
 
-      <section className="relative bg-[#fbf6ee] py-16 sm:py-20 lg:py-24">
+      <section className="relative bg-surface-2 py-16 sm:py-20 lg:py-24">
         <PaperEdge position="top" />
         <Container>
           <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase text-orange-700">
+            <p className="text-sm font-semibold uppercase text-accent">
               How we work
             </p>
             <h2 className="mt-3 font-display text-[clamp(2rem,4vw,3.7rem)] font-semibold leading-tight text-ink text-balance">
@@ -113,7 +113,7 @@ export function SignalControlRoom() {
             <svg
               aria-hidden
               viewBox="0 0 1050 720"
-              className="pointer-events-none absolute inset-x-0 top-10 hidden h-[720px] w-full text-orange-400/70 lg:block"
+              className="pointer-events-none absolute inset-x-0 top-10 hidden h-[720px] w-full text-accent/70 lg:block"
               preserveAspectRatio="none"
             >
               <path
@@ -130,7 +130,7 @@ export function SignalControlRoom() {
                 <article
                   key={step.label}
                   className={cn(
-                    "relative rounded-[1.5rem] border border-orange-100 bg-white p-4 shadow-[0_24px_70px_-48px_rgba(124,45,18,0.48)]",
+                    "relative rounded-[1.5rem] border border-line bg-white p-4 shadow-[0_24px_70px_-48px_rgba(0,0,0,0.35)]",
                     index % 2 === 1 && "lg:mt-20",
                   )}
                 >
@@ -145,7 +145,7 @@ export function SignalControlRoom() {
                       />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-xs font-semibold uppercase text-orange-700">
+                      <p className="text-xs font-semibold uppercase text-accent">
                         {String(index + 1).padStart(2, "0")} / {step.label}
                       </p>
                       <h3 className="mt-2 font-display text-2xl font-semibold leading-tight text-ink text-balance">
@@ -168,7 +168,7 @@ export function SignalControlRoom() {
         <Container>
           <div className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-start lg:gap-16">
             <div className="min-w-0">
-              <p className="text-sm font-semibold uppercase text-orange-700">
+              <p className="text-sm font-semibold uppercase text-accent">
                 Service depth
               </p>
               <h2 className="mt-3 font-display text-[clamp(2rem,4vw,3.4rem)] font-semibold leading-tight text-ink text-balance">

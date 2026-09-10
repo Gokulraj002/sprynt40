@@ -26,9 +26,9 @@ const projectTone: Record<Project["tint"], { dot: string; panel: string; text: s
     text: "text-orange-700",
   },
   neutral: {
-    dot: "bg-cyan-500",
-    panel: "border-cyan-100 bg-cyan-50/50",
-    text: "text-cyan-700",
+    dot: "bg-ink",
+    panel: "border-line bg-surface",
+    text: "text-ink-muted",
   },
   violet: {
     dot: "bg-orange-500",

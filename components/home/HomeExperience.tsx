@@ -35,9 +35,9 @@ const homeServiceImages: Record<(typeof homeServiceTitles)[number], string> = {
 };
 
 const toneDot: Record<CatalogGroup["tone"], string> = {
-  orange: "bg-orange-500",
-  blue: "bg-cyan-500",
-  violet: "bg-orange-500",
+  orange: "bg-accent",
+  blue: "bg-accent",
+  violet: "bg-accent",
 };
 
 export function HomeExperience() {
@@ -122,7 +122,7 @@ export function HomeExperience() {
             whileInView="visible"
             viewport={viewportOnce}
           >
-            <motion.p variants={fadeUp} className="text-sm font-semibold uppercase text-orange-600">
+            <motion.p variants={fadeUp} className="text-sm font-semibold uppercase text-accent">
               Why it works
             </motion.p>
             <motion.h2
@@ -272,7 +272,7 @@ function HomeServiceJourney() {
         >
           <motion.p
             variants={fadeUp}
-            className="text-sm font-semibold uppercase text-orange-600"
+            className="text-sm font-semibold uppercase text-accent"
           >
             Growth route
           </motion.p>

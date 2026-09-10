@@ -180,7 +180,7 @@ export default async function ServicePage({
       </Section>
 
       {/* Closing band */}
-      <Section theme="light" className="bg-[#f6fbf8]">
+      <Section theme="light">
         <Container>
           <div className="max-w-2xl">
             <h2 className="font-display text-title font-medium text-balance">

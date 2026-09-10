@@ -31,13 +31,13 @@ const serviceImageByTitle: Record<CatalogGroup["title"], string> = {
 
 const toneClasses: Record<CatalogGroup["tone"], string> = {
   orange: "border-orange-200 bg-orange-50 text-orange-700",
-  blue: "border-cyan-200 bg-cyan-50 text-cyan-800",
+  blue: "border-orange-200 bg-orange-50 text-orange-700",
   violet: "border-orange-200 bg-orange-50 text-orange-700",
 };
 
 const dotClasses: Record<CatalogGroup["tone"], string> = {
   orange: "bg-orange-500",
-  blue: "bg-cyan-500",
+  blue: "bg-orange-500",
   violet: "bg-orange-500",
 };
 

@@ -1,8 +1,7 @@
 "use server";
 
 /**
- * Server Action backing the /contact multi-step form (see
- * .claude/skills/agency-sections/references/13-contact-forms.md §5/§6).
+ * Server Action backing the /contact form.
  *
  * Spam stack: honeypot field + submit-time-trap, layered with server-side
  * Zod validation. Bots get a generic success response so a failed honeypot
@@ -14,29 +13,40 @@ import { z } from "zod";
 const MIN_FILL_TIME_MS = 2500;
 
 const contactFields = [
-  "service",
-  "budget",
   "name",
   "email",
   "phone",
+  "company",
+  "service",
+  "budget",
   "message",
+  "consent",
 ] as const;
 
 type ContactField = (typeof contactFields)[number];
 
 const contactSchema = z
   .object({
-    service: z.string().min(1, "Choose what you need help with."),
-    budget: z.string().min(1, "Choose a project budget range."),
-    name: z.string().trim().min(2, "Enter your name."),
+    name: z.string().trim().min(2, "Enter your full name."),
     email: z
       .string()
       .trim()
-      .email("Enter a valid email like name@company.com.")
+      .email("Enter a valid business email.")
       .optional()
       .or(z.literal("")),
-    phone: z.string().trim().min(7, "Enter a valid phone number.").optional().or(z.literal("")),
-    message: z.string().trim().optional(),
+    phone: z
+      .string()
+      .trim()
+      .min(7, "Enter a valid phone number.")
+      .optional()
+      .or(z.literal("")),
+    company: z.string().trim().optional(),
+    service: z.string().min(1, "Choose the service you're interested in."),
+    budget: z.string().min(1, "Choose an approximate budget range."),
+    message: z.string().trim().min(10, "Tell us a little about your project (10+ characters)."),
+    consent: z.literal("on", {
+      message: "Please agree to the privacy policy to continue.",
+    }),
   })
   .refine((data) => Boolean(data.email) || Boolean(data.phone), {
     message: "Add an email or phone number so we can reach you.",
@@ -52,7 +62,7 @@ export type ContactFormState = {
 
 export const initialContactFormState: ContactFormState = { ok: false };
 
-const SUCCESS_MESSAGE = "Got it — we'll reply within one working day.";
+const SUCCESS_MESSAGE = "Thanks — we've received your enquiry and will reply within one working day.";
 
 export async function submitContact(
   _prevState: ContactFormState,
@@ -66,18 +76,19 @@ export async function submitContact(
   const submittedTooFast =
     !Number.isFinite(startedAt) || Date.now() - startedAt < MIN_FILL_TIME_MS;
 
-  // Bot signals: never reveal which check failed — fake a normal success.
   if (honeypotFilled || submittedTooFast) {
     return { ok: true, message: SUCCESS_MESSAGE };
   }
 
   const parsed = contactSchema.safeParse({
-    service: formData.get("service"),
-    budget: formData.get("budget"),
     name: formData.get("name"),
     email: formData.get("email"),
     phone: formData.get("phone"),
+    company: formData.get("company"),
+    service: formData.get("service"),
+    budget: formData.get("budget"),
     message: formData.get("message"),
+    consent: formData.get("consent"),
   });
 
   if (!parsed.success) {
@@ -90,7 +101,7 @@ export async function submitContact(
     return {
       ok: false,
       errors,
-      message: "Check the highlighted fields and try again.",
+      message: "Please check the highlighted fields and try again.",
     };
   }
 

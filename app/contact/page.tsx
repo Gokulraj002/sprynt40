@@ -67,8 +67,8 @@ export default function ContactPage() {
             <ContactForm />
 
             <aside className="grid h-fit min-w-0 gap-5 lg:sticky lg:top-28">
-              <div className="rounded-lg border border-orange-100 bg-white p-5 shadow-[0_24px_70px_-50px_rgba(124,45,18,0.45)] sm:p-6">
-                <Chip className="border-orange-200 bg-orange-50 text-orange-700">
+              <div className="rounded-lg border border-line bg-white p-5 shadow-[0_24px_70px_-50px_rgba(0,0,0,0.35)] sm:p-6">
+                <Chip className="border-accent/30 bg-accent/10 text-accent">
                   Faster route
                 </Chip>
                 <h2 className="mt-4 font-display text-3xl font-semibold leading-tight text-ink text-balance">
@@ -93,7 +93,7 @@ export default function ContactPage() {
                     <a
                       key={option.label}
                       href={option.href}
-                      className="flex min-h-12 items-center justify-between gap-4 rounded-lg border border-line bg-surface px-4 py-3 text-sm font-medium text-ink transition-colors hover:border-orange-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                      className="flex min-h-12 items-center justify-between gap-4 rounded-lg border border-line bg-surface px-4 py-3 text-sm font-medium text-ink transition-colors hover:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                     >
                       <span>{option.label}</span>
                       <span className="min-w-0 truncate text-right text-ink-muted">
@@ -105,7 +105,7 @@ export default function ContactPage() {
                   {site.phone && (
                     <a
                       href={`tel:${site.phone}`}
-                      className="flex min-h-12 items-center justify-between gap-4 rounded-lg border border-line bg-surface px-4 py-3 text-sm font-medium text-ink transition-colors hover:border-orange-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                      className="flex min-h-12 items-center justify-between gap-4 rounded-lg border border-line bg-surface px-4 py-3 text-sm font-medium text-ink transition-colors hover:border-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                     >
                       <span>Call</span>
                       <span className="min-w-0 truncate text-right text-ink-muted">
@@ -116,7 +116,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="overflow-hidden rounded-lg border border-cyan-100 bg-white shadow-[0_24px_70px_-54px_rgba(15,23,42,0.5)]">
+              <div className="overflow-hidden rounded-lg border border-line bg-white shadow-[0_24px_70px_-54px_rgba(0,0,0,0.5)]">
                 <div className="relative aspect-[1.55/1]">
                   <Image
                     src="/images/services/crm-automation.webp"
@@ -128,7 +128,7 @@ export default function ContactPage() {
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.05),rgba(15,23,42,0.42))]" />
                 </div>
                 <div className="p-5 sm:p-6">
-                  <p className="text-sm font-semibold uppercase text-cyan-700">
+                  <p className="text-sm font-semibold uppercase text-accent">
                     What to include
                   </p>
                   <ul className="mt-4 grid gap-3 text-sm leading-6 text-ink-muted">
@@ -148,7 +148,7 @@ export default function ContactPage() {
         <Container>
           <div className="grid min-w-0 gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start lg:gap-16">
             <div className="min-w-0">
-              <p className="text-sm font-semibold uppercase text-orange-700">
+              <p className="text-sm font-semibold uppercase text-accent">
                 After you enquire
               </p>
               <h2 className="mt-3 font-display text-[clamp(2rem,4vw,3.4rem)] font-semibold leading-tight text-ink text-balance">
@@ -161,7 +161,7 @@ export default function ContactPage() {
             </div>
 
             <div className="relative grid gap-4 sm:grid-cols-3">
-              <div className="absolute left-[9%] right-[9%] top-8 hidden h-px border-t-2 border-dashed border-orange-300 sm:block" />
+              <div className="absolute left-[9%] right-[9%] top-8 hidden h-px border-t-2 border-dashed border-accent/50 sm:block" />
               {responseSteps.map((step, index) => (
                 <div
                   key={step.label}
@@ -170,7 +170,7 @@ export default function ContactPage() {
                   <span
                     className={cn(
                       "flex size-10 items-center justify-center rounded-full text-sm font-bold text-white",
-                      index === 1 ? "bg-cyan-500" : "bg-orange-500",
+                      "bg-accent",
                     )}
                   >
                     {index + 1}

@@ -9,8 +9,8 @@ export const site = {
   description:
     "A digital marketing agency building tailored 4-month growth systems across websites, ads, SEO, content, CRM, automation, loyalty and reporting.",
   url: "https://sprynt40.com",
-  city: "India",
-  email: "hello@sprynt40.com",
+  city: "Andhra Pradesh, India",
+  email: "support@sprynt20.com",
   phone: "",
   whatsapp: "",
   bookingUrl: "/contact",

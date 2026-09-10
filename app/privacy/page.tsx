@@ -107,9 +107,7 @@ const sections = [
         >
           {site.email}
         </a>
-        {/* TODO before launch: replace with the real, monitored privacy inbox [COMPLETE_CONTACT_EMAIL] and the registered [COMPANY_ADDRESS] below. Add a DPO email if one is appointed. */}
-        {" "}or write to us at our registered office (address available on
-        request). We aim to acknowledge every request within seven working days.
+        . We aim to acknowledge every request within seven working days.
       </>,
       "This policy is governed by the laws of India. Any dispute arising out of or in connection with it is subject to the exclusive jurisdiction of the competent courts in India.",
     ],

@@ -65,7 +65,7 @@ export default function TermsPage() {
                 creative, website, advertising, analytics and related services we provide;
                 &ldquo;Client&rdquo; means the individual or entity that engages us for
                 Services; &ldquo;we&rdquo;, &ldquo;us&rdquo; and &ldquo;our&rdquo; refer to{" "}
-                {site.name} (&ldquo;[LEGAL_ENTITY_NAME]&rdquo;); and &ldquo;you&rdquo; means
+                {site.name} (&ldquo;Sprynt40&rdquo;); and &ldquo;you&rdquo; means
                 the person accessing the Site or engaging us, including anyone acting on
                 behalf of a Client.
               </p>
@@ -260,7 +260,7 @@ export default function TermsPage() {
                 construed in accordance with the laws of India, including the Information
                 Technology Act, 2000, the Indian Contract Act, 1872 and the Consumer
                 Protection Act, 2019, without regard to conflict-of-laws principles. Subject
-                to the dispute resolution clause below, the competent courts at [CITY], India
+                to the dispute resolution clause below, the competent courts at Andhra Pradesh, India
                 shall have exclusive jurisdiction over any dispute arising out of or in
                 connection with these Terms.
               </p>
@@ -278,7 +278,7 @@ export default function TermsPage() {
                 resolved within that period, it shall be referred to and finally resolved by
                 arbitration under the Arbitration and Conciliation Act, 1996, by a sole
                 arbitrator appointed by mutual agreement of the parties. The seat and venue of
-                arbitration shall be [CITY], India, and the language of arbitration shall be
+                arbitration shall be Andhra Pradesh, India, and the language of arbitration shall be
                 English. The arbitral award shall be final and binding on the parties. Nothing
                 in this clause prevents either party from seeking urgent interim or injunctive
                 relief from a court of competent jurisdiction.
@@ -306,12 +306,12 @@ export default function TermsPage() {
               <p className="mt-4 leading-relaxed text-ink-muted">
                 Questions, notices or requests about these Terms can be sent to{" "}
                 <a
-                  href="mailto:[COMPLETE_CONTACT_EMAIL]"
+                  href="mailto:support@sprynt20.com"
                   className="text-ink underline underline-offset-4"
                 >
-                  [COMPLETE_CONTACT_EMAIL]
+                  support@sprynt20.com
                 </a>
-                , or by post to {site.name}, [REGISTERED_OFFICE_ADDRESS], India.
+                .
               </p>
             </div>
           </div>

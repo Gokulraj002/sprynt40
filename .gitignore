@@ -43,3 +43,4 @@ next-env.d.ts
 # local tooling
 .claude/
 BUILD_SPEC.md
+AGENTS.md

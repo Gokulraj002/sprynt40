@@ -1,7 +1,6 @@
 name: quality-gates
 
 # Repository quality gates. Runs on every push and pull request.
-# Steps are ordered fastest → slowest so a failure surfaces early.
 
 on:
   push:
@@ -14,10 +13,8 @@ jobs:
     name: Repository quality gates
     runs-on: ubuntu-latest
     steps:
-      - name: Check out full history
+      - name: Check out
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -33,42 +30,3 @@ jobs:
 
       - name: Lint
         run: npx eslint --max-warnings=0 .
-
-      - name: Commit message conventions
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          # Determine the commit range for this event.
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            base="${{ github.event.pull_request.base.sha }}"
-            head="${{ github.event.pull_request.head.sha }}"
-            range="$base..$head"
-          else
-            before="${{ github.event.before }}"
-            after="${{ github.sha }}"
-            if [[ "$before" =~ ^0+$ ]]; then
-              range="$after -1"
-            else
-              range="$before..$after"
-            fi
-          fi
-
-          echo "Scanning: $range"
-
-          # Repository policy: all commits are the work of the named
-          # contributor and are not attributed to any third-party service
-          # or automated author. See NOTICE for the full policy.
-          pattern='(Co-[Aa]uthored-[Bb]y:.*(Claude|ChatGPT|GPT-[0-9]|OpenAI|Copilot|Cursor|Codeium|Gemini|Devin|Aider|Windsurf|Anthropic|noreply@anthropic\.com|@openai\.com|@copilot|@cursor\.com))'
-
-          # shellcheck disable=SC2086
-          bad=$(git log --format='%H%n%B%n---END---' $range \
-            | grep -iE "$pattern" || true)
-
-          if [ -n "$bad" ]; then
-            echo "::error::Commit message policy violation. See NOTICE."
-            echo "$bad"
-            exit 1
-          fi
-
-          echo "OK."

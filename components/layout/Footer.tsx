@@ -20,7 +20,7 @@ export function Footer() {
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.3fr_2fr]">
           <div className="max-w-xs">
-            <Logo withTagline className="[&_svg]:size-10" />
+            <Logo />
             <p className="mt-4 text-sm text-ink-muted">
               Websites, ads, SEO, content, CRM, automation and reporting
               connected into one measurable growth system.

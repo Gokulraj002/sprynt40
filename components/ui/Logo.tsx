@@ -1,58 +1,48 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { MouseEventHandler } from "react";
 import { cn } from "@/lib/cn";
 import { site } from "@/lib/data/site";
 
-/* Sprynt40 lockup: north-east growth arrow mark + bold wordmark. */
-export function LogoMark({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 32 32"
-      aria-hidden="true"
-      className={cn("size-8 shrink-0", className)}
-    >
-      <path
-        fill="var(--accent)"
-        d="M3 3h26v26h-9.8V16.7L8.8 27.1 3 21.3l10.4-10.4H3z"
-      />
-    </svg>
-  );
-}
-
+/**
+ * Sprynt40 brand lockup — orange arrow mark + "Sprynt40" wordmark + "Grow Loud!"
+ * tagline, all together in one asset (public/logos.jpeg, 1600×1600, black bg).
+ *
+ * The source image has ~40% padding around the actual mark, so we render it
+ * into a wide container with `object-cover` — the crop lands exactly on the
+ * logo band and the surrounding black reads as an intentional brand badge on
+ * light or dark surfaces.
+ */
 export function Logo({
   className,
   onClick,
-  withTagline,
+  withTagline = true,
 }: {
   className?: string;
   onClick?: MouseEventHandler<HTMLAnchorElement>;
+  /** kept for API compatibility; tagline is baked into the lockup asset. */
   withTagline?: boolean;
 }) {
+  void withTagline;
+
   return (
     <Link
       href="/"
-      aria-label={`${site.name} — home`}
+      aria-label={`${site.name} — ${site.tagline}`}
       onClick={onClick}
       className={cn(
-        "inline-flex items-center gap-2.5 rounded-sm transition-opacity duration-300 hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent",
+        "inline-flex items-center rounded-sm transition-opacity duration-300 hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent",
         className,
       )}
     >
-      <LogoMark />
-      <span className="leading-none">
-        <span className="block font-display text-xl font-black tracking-normal text-ink sm:text-2xl">
-          {site.name}
-        </span>
-        {withTagline && (
-          <span
-            data-logo-tagline
-            className="mt-1 block text-xs font-medium"
-            style={{ color: "var(--palette-tagline)" }}
-          >
-            {site.tagline}
-          </span>
-        )}
-      </span>
+      <Image
+        src="/logos.jpeg"
+        alt={`${site.name} — ${site.tagline}`}
+        width={1600}
+        height={1600}
+        priority
+        className="h-10 w-40 rounded-md object-cover object-center sm:h-12 sm:w-48"
+      />
     </Link>
   );
 }

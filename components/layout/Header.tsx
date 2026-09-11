@@ -94,11 +94,7 @@ export function Header() {
       >
         <div className="relative z-[110]">
           <Container className="flex h-14 items-center justify-between sm:h-20">
-            <Logo
-              withTagline
-              onClick={() => setMobileOpen(false)}
-              className="[&_svg]:size-7 [&_[data-logo-tagline]]:hidden sm:[&_svg]:size-9 sm:[&_[data-logo-tagline]]:block"
-            />
+            <Logo onClick={() => setMobileOpen(false)} />
 
             <nav
               aria-label="Primary"

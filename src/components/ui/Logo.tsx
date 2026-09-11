@@ -5,13 +5,10 @@ import { cn } from "@/lib/cn";
 import { site } from "@/lib/data/site";
 
 /**
- * Sprynt40 brand lockup — orange arrow mark + "Sprynt40" wordmark +
- * "Grow Loud!" tagline. Source asset `public/logo.jpeg` is a tightly-cropped
- * 1400×420 image on brand-black background (~3.33:1 aspect).
- *
- * Rendered with `object-contain` so the full lockup is always visible — no
- * crop, no cut-off letters. The black background reads as an intentional
- * "badge" on either light or dark headers.
+ * Sprynt40 brand lockup — the original `public/logos.jpeg` (1600×1600 with
+ * the arrow + wordmark + tagline centered on a black ground). Rendered at
+ * a 4:1 aspect with `object-cover`, so the visible frame lands on the
+ * logo band and the surrounding black reads as an intentional badge.
  */
 export function Logo({
   className,
@@ -31,18 +28,18 @@ export function Logo({
       aria-label={`${site.name} — ${site.tagline}`}
       onClick={onClick}
       className={cn(
-        "inline-flex items-center rounded-md bg-black px-2 py-1 transition-opacity duration-300 hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent sm:px-2.5 sm:py-1.5",
+        "inline-flex items-center rounded-md transition-opacity duration-300 hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent",
         className,
       )}
     >
       <Image
-        src="/logo.jpeg"
+        src="/logos.jpeg"
         alt={`${site.name} — ${site.tagline}`}
-        width={1400}
-        height={420}
+        width={1600}
+        height={1600}
         priority
-        sizes="(max-width: 640px) 128px, 176px"
-        className="block h-8 w-auto object-contain sm:h-9"
+        sizes="(max-width: 640px) 144px, 192px"
+        className="block h-9 w-36 rounded-md object-cover object-center sm:h-12 sm:w-48"
       />
     </Link>
   );

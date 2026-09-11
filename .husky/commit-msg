@@ -1,0 +1,23 @@
+# Local commit-message gate. Runs after the message is authored but
+# before the commit is finalized. Rejects trailer patterns that would
+# also be rejected by CI, so the failure is visible immediately.
+#
+# Bypass: `git commit --no-verify` (owner-authorization only).
+
+msg_file="$1"
+pattern='(Co-Authored-By:[[:space:]]*(Claude|Copilot|Cursor|Codeium|Gemini|ChatGPT|GPT-[0-9]|OpenAI|Anthropic|Devin|Aider|Windsurf)|Generated with \[Claude Code\]|🤖 Generated with)'
+
+if grep -iEq "$pattern" "$msg_file"; then
+  echo ""
+  echo "✗ Commit blocked."
+  echo ""
+  echo "  Your commit message contains an attribution trailer that names a"
+  echo "  third-party editing tool. This repository is proprietary — see"
+  echo "  NOTICE for the full policy."
+  echo ""
+  echo "  Remove the offending trailer line from the commit message and try again."
+  echo "  If you have written owner authorization, bypass with:"
+  echo "      git commit --no-verify"
+  echo ""
+  exit 1
+fi

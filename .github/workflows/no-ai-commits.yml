@@ -1,0 +1,68 @@
+name: no-ai-commits
+
+# Rejects any push or PR whose commit trailers advertise an AI co-author
+# (Claude, ChatGPT/GPT, Copilot, Cursor, Codeium, Gemini, etc.). This is
+# the server-side gate to the in-code AI policy described in AI_POLICY.md.
+#
+# A determined user can strip the trailer manually before pushing, but
+# doing so removes the paper trail — the resulting commit no longer
+# advertises AI authorship, which is what the policy asks for.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  scan:
+    name: Scan commit messages for AI attribution
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out full history for the range being pushed
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reject commits containing AI author trailers
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Determine the commit range for this event.
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            base="${{ github.event.pull_request.base.sha }}"
+            head="${{ github.event.pull_request.head.sha }}"
+            range="$base..$head"
+          else
+            before="${{ github.event.before }}"
+            after="${{ github.sha }}"
+            # First push to a new branch: before is 0000…; scan just the tip.
+            if [[ "$before" =~ ^0+$ ]]; then
+              range="$after -1"
+            else
+              range="$before..$after"
+            fi
+          fi
+
+          echo "Scanning commit range: $range"
+
+          # Pattern of forbidden co-authors. Matches the whole author line
+          # loosely (case-insensitive) so slight spelling variations still
+          # get caught.
+          pattern='(Claude|ChatGPT|GPT-[0-9]|OpenAI|Copilot|Cursor|Codeium|Gemini|Devin|Aider|Windsurf|Anthropic|noreply@anthropic\.com|@openai\.com|@copilot|@cursor\.com)'
+
+          # shellcheck disable=SC2086
+          bad=$(git log --format='%H%n%an <%ae>%n%B%n---END-COMMIT---' $range \
+            | grep -iE "$pattern" || true)
+
+          if [ -n "$bad" ]; then
+            echo "::error::AI co-author trailer detected in one or more commits."
+            echo "Sprynt40 does not accept AI-attributed commits. See AI_POLICY.md."
+            echo ""
+            echo "Offending lines:"
+            echo "$bad"
+            exit 1
+          fi
+
+          echo "No AI attribution found. OK."

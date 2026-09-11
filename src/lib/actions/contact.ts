@@ -53,7 +53,7 @@ const contactSchema = z
     path: ["email"],
   });
 
-export type ContactFormState = {
+type ContactFormState = {
   ok: boolean;
   /** User-facing summary message — success copy or a generic error nudge. */
   message?: string;

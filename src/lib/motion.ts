@@ -8,7 +8,6 @@ export const EASE_OUT = [0.16, 1, 0.3, 1] as const; // expo-out
 export const DUR = { fast: 0.3, base: 0.5, slow: 0.75 } as const;
 export const STAGGER = 0.06;
 
-export const springPremium: Transition = { type: "spring", stiffness: 120, damping: 20, mass: 1 };
 export const springSnappy: Transition = { type: "spring", stiffness: 300, damping: 24, mass: 0.6 };
 
 /*
@@ -39,11 +38,6 @@ export const fadeUp: Variants = {
     y: 0,
     transition: { duration: DUR.base, ease: EASE_OUT },
   },
-};
-
-export const fadeIn: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: DUR.slow, ease: "easeOut" } },
 };
 
 export const staggerParent: Variants = {

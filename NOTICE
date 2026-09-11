@@ -15,19 +15,6 @@ limited purpose and does not transfer ownership of anything in it. Access does
 not carry an implied right to reuse the code, the design, or the written copy
 in any other project, for any other client, or for yourself.
 
-Third-party and automated services
-----------------------------------
-The contents of this repository are confidential. Submitting them to any
-third-party service, platform, or automated system — including services that
-retain, reproduce, transmit, or derive works from the material submitted to
-them — is a disclosure to a third party and requires the Owner's prior written
-permission under clause 5 of the LICENSE.
-
-This is a contractual restriction on the people granted access. It is not, and
-is not represented to be, a technical control. Anyone holding a copy of these
-files is technically capable of doing all of the above; the restriction that
-applies to them is a legal one, not a mechanism enforced by this repository.
-
 Contributions
 -------------
 This project does not accept unsolicited external contributions. Work carried

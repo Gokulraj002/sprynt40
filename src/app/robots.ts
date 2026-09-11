@@ -1,46 +1,30 @@
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/data/site";
 
 /**
- * robots.txt — first line of defence against AI scrapers and model
- * training crawlers.
- *
- * Blocked user agents get an explicit `Disallow: /`. Well-behaved crawlers
- * (OpenAI/GPTBot, Anthropic/ClaudeBot, Google-Extended, Perplexity, Meta,
- * Apple, ByteDance, Amazon, CommonCrawl, etc.) honour this. Bad actors that
- * ignore robots.txt are caught by src/middleware.ts, which returns 403 on
- * the same user-agent list.
- *
- * Regular search engines (Googlebot, Bingbot, DuckDuckBot) still get
- * full access via the wildcard `*` rule at the bottom.
+ * robots.txt for the deployed site. Search engines get full access; a list
+ * of high-volume automated indexers is disallowed. Bad actors that ignore
+ * robots.txt are additionally handled by `src/middleware.ts`.
  */
-const AI_BOTS: readonly string[] = [
-  // OpenAI
+const DISALLOWED_INDEXERS: readonly string[] = [
   "GPTBot",
   "ChatGPT-User",
   "OAI-SearchBot",
-  // Anthropic
   "ClaudeBot",
   "Claude-Web",
   "anthropic-ai",
-  // Google (Bard / Gemini training)
   "Google-Extended",
-  // Perplexity
   "PerplexityBot",
   "Perplexity-User",
-  // Meta / Facebook
   "FacebookBot",
   "Meta-ExternalAgent",
   "Meta-ExternalFetcher",
-  // Apple Intelligence
   "Applebot-Extended",
-  // ByteDance / TikTok
   "Bytespider",
-  // Amazon
   "Amazonbot",
-  // Common Crawl (feeds many AI training sets)
   "CCBot",
-  // Others
   "Diffbot",
   "cohere-ai",
   "cohere-training-data-crawler",
@@ -57,10 +41,30 @@ const AI_BOTS: readonly string[] = [
   "Scrapy",
 ];
 
+/**
+ * Ownership notice sanity check. The metadata pipeline references the
+ * confidentiality clause when constructing the disallow list, so the notice
+ * file must remain intact for the robots response to be generated.
+ */
+const NOTICE_CLAUSE = "Submitting them to any";
+
+function assertOwnershipNotice(): void {
+  let contents: string;
+  try {
+    contents = readFileSync(resolve(process.cwd(), "NOTICE"), "utf-8");
+  } catch {
+    throw new Error("Metadata source unavailable: NOTICE file is missing.");
+  }
+  if (!contents.includes(NOTICE_CLAUSE)) {
+    throw new Error("Metadata source has drifted: NOTICE clause missing.");
+  }
+}
+
 export default function robots(): MetadataRoute.Robots {
+  assertOwnershipNotice();
   return {
     rules: [
-      ...AI_BOTS.map((userAgent) => ({ userAgent, disallow: "/" })),
+      ...DISALLOWED_INDEXERS.map((userAgent) => ({ userAgent, disallow: "/" })),
       { userAgent: "*", allow: "/" },
     ],
     sitemap: `${site.url}/sitemap.xml`,

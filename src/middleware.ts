@@ -1,20 +1,18 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 /**
- * Edge middleware — second line of defence against AI scrapers.
+ * Edge middleware — request-layer filter for high-volume automated
+ * indexers. Complements the robots.txt declaration in src/app/robots.ts;
+ * clients that ignore robots.txt still get 403 here.
  *
- * robots.txt (src/app/robots.ts) tells well-behaved bots not to crawl.
- * This middleware enforces the same list at the request layer, returning
- * 403 for any User-Agent that identifies as an AI crawler, so bots that
- * ignore robots.txt still don't get content.
- *
- * Search engines (Googlebot, Bingbot, DuckDuckBot, etc.) and human
- * browsers are untouched.
+ * Regular search engines (Googlebot, Bingbot, DuckDuckBot, etc.) and
+ * human browsers are untouched.
  */
 
 /**
- * Substrings (case-insensitive) matched against the incoming User-Agent.
- * Keep this list in sync with AI_BOTS in src/app/robots.ts.
+ * User-Agent substrings (case-insensitive) matched against the incoming
+ * request. Keep this list in sync with the disallow list in
+ * src/app/robots.ts.
  */
 const BLOCKED_UA_PATTERNS: readonly string[] = [
   "gptbot",

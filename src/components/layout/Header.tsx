@@ -34,7 +34,7 @@ export function Header() {
 
   const { scrollY } = useScroll();
   const pathname = usePathname();
-  const headerTheme = mobileOpen ? "light" : surfaceTheme;
+  const headerTheme = mobileOpen ? "dark" : surfaceTheme;
 
   // Close the mobile overlay whenever the route changes (e.g. a social link
   // or programmatic navigation), not just on direct nav-link clicks.
@@ -89,7 +89,7 @@ export function Header() {
             ? "border-b border-white/10 bg-black/55 text-white shadow-[0_18px_60px_-44px_rgba(0,0,0,0.95)] backdrop-blur-xl"
             : scrolled
               ? "border-b border-line bg-white/92 shadow-sm backdrop-blur-xl"
-              : "border-b border-orange-100/70 bg-white/78 backdrop-blur-xl",
+              : "border-b border-line bg-white/78 backdrop-blur-xl",
         )}
       >
         <div className="relative z-[110]">
@@ -145,7 +145,7 @@ export function Header() {
                 "relative flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full border shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:hidden",
                 headerTheme === "dark"
                   ? "border-white/18 bg-white/12"
-                  : "border-orange-100 bg-white/88",
+                  : "border-line bg-white/88",
               )}
             >
               <motion.span

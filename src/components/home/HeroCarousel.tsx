@@ -165,44 +165,54 @@ function DesktopCommandHero() {
   ];
 
   return (
-    <Section id="hero" theme="dark" className="hidden h-[clamp(760px,calc(100svh-5rem),1040px)] min-h-[760px] overflow-hidden bg-black pt-28 pb-10 md:flex lg:pt-32">
+    <Section id="hero" theme="dark" className="hidden min-h-svh overflow-hidden pt-24 pb-8 md:flex lg:pt-[7.5rem]">
       <Image
         src="/images/home/hero-command-wall.png"
         alt="A classical strategist using a laptop inside a panoramic digital marketing command centre"
         fill
         priority
         sizes="100vw"
-        className="object-cover object-center"
-        style={{ filter: "grayscale(.35) sepia(.75) saturate(2.2) hue-rotate(335deg) brightness(.78)" }}
+        className="object-cover object-center saturate-[0.88] hue-rotate-[105deg]"
       />
-      <div className="absolute inset-0 bg-[rgba(31,5,0,0.22)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_24%,rgba(0,0,0,0.18)_68%,rgba(0,0,0,0.58)_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.12),transparent_45%,rgba(0,0,0,0.48))]" />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,8,5,0.48)_0%,rgba(10,8,5,0.2)_35%,rgba(10,8,5,0.72)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(249,115,22,0.28),transparent_28%)]" />
 
-      <Container className="relative z-10 flex flex-1 flex-col items-center justify-center text-center text-white">
-        <div className="mb-auto mt-[3vh]">
-          <p className="inline-flex rounded-full border border-white/25 bg-white/10 px-5 py-2 text-sm font-medium text-white/90 shadow-sm backdrop-blur-md">
-            Digital growth engineered with AI clarity
-          </p>
-          <h1 className="mx-auto mt-7 max-w-[1080px] font-display text-[clamp(4.4rem,6.2vw,7rem)] font-semibold leading-[0.92] text-balance">
-            Being visible<br />is not enough.<br />Be measurable.
-          </h1>
-          <p className="mx-auto mt-7 max-w-3xl text-[clamp(1rem,1.35vw,1.35rem)] leading-relaxed text-white/75">
-            Sprynt40 builds digital marketing systems where creative, websites, ads and analytics work together to turn attention into qualified growth.
-          </p>
-          <div className="mt-7 flex justify-center gap-3">
-            <Button href="/contact" variant="accent" className="px-8">Build my growth plan</Button>
-            <Button href="/services" variant="outline" className="border-white/30 bg-white/10 px-8 text-white backdrop-blur hover:border-white/65">Explore services</Button>
-          </div>
-        </div>
-
-        <div className="grid w-full max-w-4xl shrink-0 grid-cols-3 overflow-hidden rounded-[2rem] border border-white/20 bg-black/30 shadow-[0_28px_90px_-45px_rgba(249,115,22,0.9)] backdrop-blur-xl">
-          {desktopSignals.map((item) => (
-            <div key={item.value} className="border-l border-white/20 px-5 py-4 first:border-l-0 lg:py-5">
-              <p className="font-display text-2xl font-semibold lg:text-3xl">{item.value}</p>
-              <p className="mt-1 text-xs text-white/65 lg:text-sm">{item.label}</p>
+      <Container className="relative z-10 flex flex-1 flex-col">
+        <div className="mx-auto flex max-w-5xl flex-1 flex-col items-center justify-between text-center">
+          <div className="pt-4 sm:pt-8">
+            <p className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-white shadow-sm backdrop-blur">
+              Digital growth engineered with AI clarity
+            </p>
+            <h1 className="mx-auto mt-6 max-w-5xl font-display text-[clamp(4rem,7.2vw,6.7rem)] font-semibold leading-[0.98] tracking-normal text-white text-balance">
+              Being visible is not enough. Be measurable.
+            </h1>
+            <p className="mx-auto mt-6 max-w-3xl text-xl leading-8 text-white/72">
+              Sprynt40 builds digital marketing systems where creative, websites, ads and analytics
+              work together to turn attention into qualified growth.
+            </p>
+            <div className="mt-7 flex items-center justify-center gap-3">
+              <Button href="/contact" variant="accent" className="px-7">Build my growth plan</Button>
+              <Button
+                href={hasWhatsApp ? waLink("Hi! I want to build a growth plan.") : "/services"}
+                variant="outline"
+                external={hasWhatsApp}
+                className="border-white/25 bg-white/10 px-7 text-white backdrop-blur hover:border-white/60"
+              >
+                {hasWhatsApp ? "Talk on WhatsApp" : "Explore services"}
+              </Button>
             </div>
-          ))}
+          </div>
+
+          <div className="w-full pb-6">
+            <div className="mx-auto grid max-w-3xl grid-cols-3 overflow-hidden rounded-full border border-white/15 bg-white/10 text-white shadow-[0_24px_90px_-40px_rgba(249,115,22,0.78)] backdrop-blur-md">
+              {desktopSignals.map((item) => (
+                <div key={item.value} className="border-l border-white/15 px-6 py-4 first:border-l-0">
+                  <p className="font-display text-3xl font-semibold">{item.value}</p>
+                  <p className="mt-1 text-sm text-white/65">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </Container>
     </Section>

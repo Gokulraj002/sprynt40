@@ -19,15 +19,7 @@ export default function TermsPage() {
         eyebrow="Legal · Last updated 11 September 2026"
         title="Terms of Service"
         lead="The umbrella terms for using this website and engaging Sprynt40 for services."
-        visual="image"
-        image={{
-          src: "/images/page-banners/learning-archive.png",
-          alt: "A soft archive of framed documents used as a terms page banner",
-          position: "center 46%",
-          muted: true,
-          badge: "Working terms",
-          labels: ["Scope", "Rights", "Terms"],
-        }}
+        visual="none"
         tone="cyan"
       />
 

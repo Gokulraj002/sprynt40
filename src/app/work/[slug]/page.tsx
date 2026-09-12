@@ -27,7 +27,6 @@ function getProjectHeroImage(project: Project) {
       alt: "A conversion-focused website design command center",
       position: "center 42%",
       muted: true,
-      badge: "Case study route",
       labels: ["Traffic", "Page", "Demo"],
     };
   }
@@ -38,7 +37,6 @@ function getProjectHeroImage(project: Project) {
       alt: "A customer bridge visual connecting demand to a local business",
       position: "center 52%",
       muted: true,
-      badge: "Case study route",
       labels: ["Search", "Lead", "Booking"],
     };
   }
@@ -48,7 +46,6 @@ function getProjectHeroImage(project: Project) {
     alt: "A digital marketing idea system for scaling campaign results",
     position: "center 52%",
     muted: true,
-    badge: "Case study route",
     labels: ["Creative", "Spend", "ROAS"],
   };
 }

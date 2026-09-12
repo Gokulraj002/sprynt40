@@ -6,7 +6,7 @@ import type { Variants, Transition } from "motion/react";
 
 export const EASE_OUT = [0.16, 1, 0.3, 1] as const; // expo-out
 export const DUR = { fast: 0.3, base: 0.5, slow: 0.75 } as const;
-export const STAGGER = 0.06;
+const STAGGER = 0.06;
 
 export const springSnappy: Transition = { type: "spring", stiffness: 300, damping: 24, mass: 0.6 };
 

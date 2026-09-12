@@ -95,7 +95,6 @@ function DeliverablesList({ deliverables }: { deliverables: string[] }) {
 function getServiceHeroImage(service: Service) {
   const shared = {
     muted: true,
-    badge: "Service system",
   };
 
   if (service.slug === "performance-marketing") {

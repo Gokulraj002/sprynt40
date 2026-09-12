@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
@@ -23,6 +23,14 @@ const PANEL_ID = "site-nav-overlay";
 const LABEL_ID = "site-nav-overlay-label";
 const SCROLL_THRESHOLD = 8;
 
+/*
+  The surface probe has to run BEFORE the browser paints, otherwise the bar
+  paints once in its initial state and then corrects itself — a white flash
+  on top of the dark hero. useLayoutEffect does exactly that; the alias keeps
+  React from warning during the server render, where layout effects never run.
+*/
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -43,24 +51,68 @@ export function Header() {
     return () => cancelAnimationFrame(raf);
   }, [pathname]);
 
-  // Mirror the theme of whatever [data-theme] surface sits beneath the bar.
-  useEffect(() => {
+  /*
+    Mirror the theme of whichever [data-theme] surface sits beneath the bar.
+
+    This measures geometry rather than hit-testing with elementsFromPoint.
+    Hit-testing only answers correctly once the page has painted, so on a
+    client-side route change it returned nothing and the bar fell back to
+    light — a white header sitting on top of the dark hero. Reading
+    getBoundingClientRect is deterministic and correct as soon as layout
+    exists, which is immediately after commit — before paint.
+  */
+  useIsomorphicLayoutEffect(() => {
     let raf = 0;
+
     const probe = () => {
-      const hits = document.elementsFromPoint(window.innerWidth / 2, 40);
-      const under = hits.find((el) => !headerRef.current?.contains(el));
-      const theme = under?.closest("[data-theme]")?.getAttribute("data-theme");
-      setSurfaceTheme(theme === "dark" ? "dark" : "light");
+      const header = headerRef.current;
+      // Sample just below the bar so we read the surface it overlaps.
+      const y = (header?.offsetHeight ?? 64) / 2;
+
+      const surfaces = document.querySelectorAll<HTMLElement>("[data-theme]");
+      let match: string | null = null;
+
+      for (const surface of surfaces) {
+        if (header?.contains(surface)) continue;
+        const rect = surface.getBoundingClientRect();
+        // Last match wins, so a themed child overrides its themed parent.
+        if (rect.top <= y && rect.bottom > y) {
+          match = surface.getAttribute("data-theme");
+        }
+      }
+
+      if (match) setSurfaceTheme(match === "dark" ? "dark" : "light");
     };
+
     const schedule = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(probe);
     };
+
     probe();
+    schedule();
+
+    /*
+      Re-probe when the content under the bar is replaced, not just when the
+      route changes. Next shows the `loading.tsx` fallback first — and that
+      skeleton is light-themed — so the bar correctly turns light, then the
+      real (dark) hero swaps in under it. `pathname` does not change across
+      that swap, so without these observers the header stayed white until the
+      visitor happened to scroll.
+    */
+    const main = document.querySelector("main");
+    const resizeObserver = new ResizeObserver(schedule);
+    if (main) resizeObserver.observe(main);
+
+    const mutationObserver = new MutationObserver(schedule);
+    if (main) mutationObserver.observe(main, { childList: true });
+
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
     return () => {
       cancelAnimationFrame(raf);
+      resizeObserver.disconnect();
+      mutationObserver.disconnect();
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
     };
@@ -142,7 +194,7 @@ export function Header() {
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               onClick={() => setMobileOpen((open) => !open)}
               className={cn(
-                "relative flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full border shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:hidden",
+                "relative flex size-11 flex-col items-center justify-center gap-1.5 rounded-full border shadow-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent md:hidden",
                 headerTheme === "dark"
                   ? "border-white/18 bg-white/12"
                   : "border-line bg-white/88",
@@ -150,22 +202,22 @@ export function Header() {
             >
               <motion.span
                 animate={
-                  mobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }
+                  mobileOpen ? { rotate: 45, y: 5 } : { rotate: 0, y: 0 }
                 }
-                transition={{ duration: 0.3, ease: EASE_OUT }}
-                className="h-px w-5 bg-ink"
+                transition={{ duration: 0.18, ease: EASE_OUT }}
+                className="h-[1.5px] w-5 bg-current"
               />
               <motion.span
                 animate={mobileOpen ? { opacity: 0 } : { opacity: 1 }}
                 transition={{ duration: 0.2 }}
-                className="h-px w-5 bg-ink"
+                className="h-[1.5px] w-5 bg-current"
               />
               <motion.span
                 animate={
-                  mobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }
+                  mobileOpen ? { rotate: -45, y: -5 } : { rotate: 0, y: 0 }
                 }
-                transition={{ duration: 0.3, ease: EASE_OUT }}
-                className="h-px w-5 bg-ink"
+                transition={{ duration: 0.18, ease: EASE_OUT }}
+                className="h-[1.5px] w-5 bg-current"
               />
             </button>
           </Container>

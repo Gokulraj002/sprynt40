@@ -73,7 +73,6 @@ export default function TeardownPage() {
           alt: "A bridge visual for finding the gap between traffic and business outcomes",
           position: "center 52%",
           muted: true,
-          badge: "Growth audit",
           labels: ["Study", "Prioritize", "Build"],
         }}
         tone="amber"

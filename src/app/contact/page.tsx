@@ -50,11 +50,9 @@ export default function ContactPage() {
         lead="Tell us where the business is stuck. We will come back within one working day with the cleanest next step for your website, campaigns, CRM or retention path."
         visual="image"
         image={{
-          src: "/images/page-banners/service-bulb.png",
-          alt: "A digital marketing idea system with services radiating from a central light",
-          position: "center 52%",
-          muted: true,
-          badge: "Start point",
+          src: "/images/page-banners/agency/contact-banner-v2.png",
+          alt: "An agency strategist listening to a founder during a discovery meeting",
+          position: "60% center",
           labels: ["Brief", "Audit", "Plan"],
         }}
         tone="amber"

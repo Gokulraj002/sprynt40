@@ -46,12 +46,11 @@ export function SignalControlRoom() {
         title="A digital growth team for one clear route."
         lead="Sprynt40 builds tailored four-month growth systems across websites, SEO, paid ads, content, CRM, automation, loyalty and reporting. We start with the business problem, then choose the service mix that can move it."
         visual="image"
+        size="compact"
         image={{
-          src: "/images/page-banners/growth-map.png",
-          alt: "A digital growth route map connecting marketing channels",
-          position: "center 48%",
-          muted: true,
-          badge: "Growth route",
+          src: "/images/page-banners/agency/about-banner-v2.png",
+          alt: "The Sprynt40 digital agency team working together in a creative studio",
+          position: "64% 10%",
           labels: ["Study", "Build", "Improve"],
         }}
         tone="amber"

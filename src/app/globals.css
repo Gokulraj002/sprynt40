@@ -128,19 +128,6 @@
   height: 1px;
 }
 
-/* seamless infinite-scroll track for Marquee (duplicated children, -50%) */
-@utility animate-marquee {
-  animation: marquee-scroll linear infinite;
-}
-@keyframes marquee-scroll {
-  from {
-    transform: translateX(0%);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
-
 /*
   Pure-CSS word-mask reveal for the hero headline — the one piece of content
   every visitor must see with zero scroll and zero dependency on JS/Motion

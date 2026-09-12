@@ -12,7 +12,7 @@ import {
 import { hasWhatsApp, site, waLink } from "@/lib/data/site";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
-import { EASE_OUT, STAGGER } from "@/lib/motion";
+import { EASE_OUT } from "@/lib/motion";
 
 /*
   Full-screen mobile nav overlay. Renders as a SIBLING of the header, not a
@@ -26,17 +26,22 @@ import { EASE_OUT, STAGGER } from "@/lib/motion";
   Reads as a proper mobile drawer rather than a magazine takeover.
 */
 
+/*
+  The whole overlay lands in ~440ms. It used to take ~800ms — a 0.35s panel
+  plus 0.15s delayChildren plus five staggered rows — which reads as the menu
+  being broken rather than animated.
+*/
 const panelVariants: Variants = {
-  hidden: { opacity: 0, y: -12 },
+  hidden: { opacity: 0, y: -8 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.35, ease: EASE_OUT },
+    transition: { duration: 0.22, ease: EASE_OUT },
   },
   exit: {
     opacity: 0,
-    y: -8,
-    transition: { duration: 0.2, ease: EASE_OUT },
+    y: -6,
+    transition: { duration: 0.14, ease: "easeIn" },
   },
 };
 
@@ -48,7 +53,7 @@ const panelVariantsReduced: Variants = {
 
 const linksParent: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: STAGGER, delayChildren: 0.15 } },
+  visible: { transition: { staggerChildren: 0.035, delayChildren: 0.04 } },
 };
 
 const linksParentReduced: Variants = {
@@ -57,11 +62,11 @@ const linksParentReduced: Variants = {
 };
 
 const rowVariants: Variants = {
-  hidden: { opacity: 0, y: 8 },
+  hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.35, ease: EASE_OUT },
+    transition: { duration: 0.26, ease: EASE_OUT },
   },
 };
 
@@ -155,16 +160,6 @@ export function NavOverlay({
 
           <div className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col justify-between px-6 pb-10 pt-24 sm:px-8 sm:pt-28">
             <div className="flex flex-col gap-10">
-              {/* Section eyebrow */}
-              <motion.p
-                variants={reducedMotion ? rowReduced : rowVariants}
-                initial="hidden"
-                animate="visible"
-                className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-[color:var(--palette-tagline)]"
-              >
-                Menu
-              </motion.p>
-
               {/* Primary nav */}
               <motion.nav
                 variants={reducedMotion ? linksParentReduced : linksParent}
@@ -197,7 +192,7 @@ export function NavOverlay({
                         <span className="flex items-baseline gap-4">
                           <span
                             aria-hidden
-                            className="font-sans text-xs font-medium tracking-[0.2em] text-[color:var(--palette-tagline)]"
+                            className="font-sans text-xs font-medium tabular-nums tracking-[0.2em] text-accent/70"
                           >
                             {String(index + 1).padStart(2, "0")}
                           </span>
@@ -215,7 +210,7 @@ export function NavOverlay({
                             "size-5 shrink-0 transition-transform duration-300",
                             isActive
                               ? "text-accent"
-                              : "text-white/40 group-hover:translate-x-1 group-hover:text-accent",
+                              : "text-[color:var(--palette-tagline)] group-hover:translate-x-1 group-hover:text-accent",
                           )}
                         >
                           <path d="M5 12h14M13 6l6 6-6 6" />
@@ -231,7 +226,6 @@ export function NavOverlay({
                 variants={reducedMotion ? rowReduced : rowVariants}
                 initial="hidden"
                 animate="visible"
-                transition={{ delay: reducedMotion ? 0 : 0.35 }}
                 className="grid gap-4"
               >
                 <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-[color:var(--palette-tagline)]">
@@ -271,7 +265,6 @@ export function NavOverlay({
               variants={reducedMotion ? rowReduced : rowVariants}
               initial="hidden"
               animate="visible"
-              transition={{ delay: reducedMotion ? 0 : 0.45 }}
               className="mt-10 flex flex-col gap-6 border-t border-white/10 pt-6"
             >
               <Button

@@ -22,15 +22,7 @@ export default function RefundPolicyPage() {
         eyebrow="Legal · Last updated 1 September 2026"
         title="Refund Policy"
         lead="How service fees, platform spend and cancellation requests are handled."
-        visual="image"
-        image={{
-          src: "/images/page-banners/customer-bridge.png",
-          alt: "A soft bridge visual used as a refund policy banner",
-          position: "center 55%",
-          muted: true,
-          badge: "Clear terms",
-          labels: ["Fees", "Spend", "Support"],
-        }}
+        visual="none"
         tone="amber"
       />
 

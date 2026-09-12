@@ -48,11 +48,9 @@ export default function WorkPage() {
         lead="Representative build paths for the Sprynt40 model, showing how website, visibility, ads, CRM, retention and reporting connect around one business goal."
         visual="image"
         image={{
-          src: "/images/page-banners/customer-bridge.png",
-          alt: "A customer bridge visual connecting demand to business growth",
-          position: "center 52%",
-          muted: true,
-          badge: "Case-study route",
+          src: "/images/page-banners/agency/work-banner-v2.png",
+          alt: "An agency strategist presenting campaign performance to clients",
+          position: "60% center",
           labels: ["Audit", "Build", "Revenue"],
         }}
         tone="amber"

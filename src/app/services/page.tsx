@@ -20,12 +20,11 @@ export default function ServicesPage() {
         }
         lead="From marketing to automation, Sprynt40 builds one tailored 4-month system around your business instead of selling fixed packages."
         visual="image"
+        size="compact"
         image={{
-          src: "/images/page-banners/digital-solutions.png",
-          alt: "A clean digital solutions concept board with campaign service cards",
-          position: "center 38%",
-          muted: true,
-          badge: "Custom stack",
+          src: "/images/page-banners/agency/services-banner-v2.png",
+          alt: "A digital agency team planning a connected growth strategy together",
+          position: "63% 12%",
           labels: ["Study", "Build", "Optimize"],
         }}
         tone="violet"

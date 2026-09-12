@@ -122,15 +122,7 @@ export default function PrivacyPage() {
         eyebrow="Legal · Last updated 11 September 2026"
         title="Privacy Policy"
         lead="How Sprynt40 collects, uses and protects the information you share with us."
-        visual="image"
-        image={{
-          src: "/images/page-banners/growth-map.png",
-          alt: "A softly lit map path used as a legal page banner",
-          position: "center 58%",
-          muted: true,
-          badge: "Policy route",
-          labels: ["Collect", "Protect", "Respond"],
-        }}
+        visual="none"
         tone="emerald"
       />
 

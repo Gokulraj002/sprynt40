@@ -115,22 +115,34 @@ export default function Cursor() {
           translateY: "-50%",
         }}
       />
-      {/* Ring: spring-lagged follower, grows for interactive + labeled targets */}
+      {/*
+        Ring: spring-lagged follower, grows for interactive and labelled
+        targets. The box stays a fixed RING_SIZE and only `scale` animates —
+        animating width/height instead would force layout and paint on every
+        frame of a cursor that moves constantly.
+      */}
       <motion.div
         className="absolute left-0 top-0 flex items-center justify-center rounded-full border border-white mix-blend-difference"
         style={{
+          width: RING_SIZE,
+          height: RING_SIZE,
           x: ringX,
           y: ringY,
           translateX: "-50%",
           translateY: "-50%",
         }}
-        animate={{ width: ringSize, height: ringSize }}
+        animate={{ scale: ringSize / RING_SIZE }}
         transition={{ type: "spring", damping: 22, stiffness: 300, mass: 0.5 }}
       >
         {cursorState.label && (
-          <span className="whitespace-nowrap text-[11px] font-medium uppercase tracking-wide text-white">
+          <motion.span
+            // Undo the ring's scale so the label stays at its real size.
+            animate={{ scale: RING_SIZE / ringSize }}
+            transition={{ type: "spring", damping: 22, stiffness: 300, mass: 0.5 }}
+            className="whitespace-nowrap text-[11px] font-medium uppercase tracking-wide text-white"
+          >
             {cursorState.label}
-          </span>
+          </motion.span>
         )}
       </motion.div>
     </div>

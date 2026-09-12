@@ -1,38 +1,36 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../home1.module.css";
+import styles from "./hero.module.css";
 import { Arrow, HomeOneIcon } from "./shared";
 
 export function HeroSection() {
   return (
-    <section className={styles.hero} data-theme="dark">
-      <Image className={styles.heroImage} src="/images/home1/sprynt40-staircase-portal-v2.png" alt="A business leader climbing illuminated steps toward a monumental orange arrow portal" fill priority sizes="100vw" />
-      <div className={styles.heroShade} />
-      <div className={styles.heroWide}>
-        <div className={styles.heroCopy}>
+    <section className={styles.hero} data-theme="dark" aria-labelledby="home1-hero-title">
+      <Image className={styles.artwork} src="/images/home1/sprynt40-growth-portal-hero-v3.png" alt="A business leader climbing illuminated steps toward a monumental orange arrow portal and bright city skyline" fill priority sizes="100vw" />
+      <div className={styles.scrim} />
+      <div className={styles.frame} aria-hidden="true" />
+      <div className={styles.inner}>
+        <div className={styles.copy}>
           <p className={styles.eyebrow}>Complete business growth solutions</p>
-          <h1>From Today<br/>to <span>What&apos;s Next.</span></h1>
-          <p className={styles.lead}>Marketing, technology, automation and more—one tailored system built around your business, not a fixed package.</p>
-          <div className={styles.heroActions}>
-            <Link className={styles.primaryButton} href="/contact">Get your custom plan <Arrow /></Link>
-            <a className={styles.secondaryButton} href="#process">See how it works <span className={styles.play}>▶</span></a>
+          <h1 className={styles.title} id="home1-hero-title">Turning Today&apos;s<br/>Effort into Tomorrow&apos;s <span>Growth.</span></h1>
+          <p className={styles.lead}>From marketing to automation — one tailored system built around your business, not a fixed package.</p>
+          <div className={styles.benefits} aria-label="Growth outcomes">
+            <div className={styles.benefit}><HomeOneIcon name="chart" /><small>More</small><strong>Visibility</strong></div>
+            <div className={styles.benefit}><HomeOneIcon name="people" /><small>More</small><strong>Customers</strong></div>
+            <div className={styles.benefit}><HomeOneIcon name="growth" /><small>More</small><strong>Revenue</strong></div>
           </div>
-          <div className={styles.heroBenefits}>
-            <div><span>More</span><strong>Visibility</strong><HomeOneIcon name="chart" /></div>
-            <div><span>More</span><strong>Customers</strong><HomeOneIcon name="people" /></div>
-            <div><span>More</span><strong>Revenue</strong><HomeOneIcon name="growth" /></div>
+          <div className={styles.actions}>
+            <Link className={styles.primary} href="/contact">Get Your Custom Plan <Arrow /></Link>
+            <a className={styles.secondary} href="#process"><span className={styles.play} aria-hidden="true">▶</span> See How It Works</a>
           </div>
-          <div className={styles.heroJourney}><span>Ideas</span><i>→</i><span>Strategy</span><i>→</i><span>Execution</span><i>→</i><span>Growth</span></div>
+          <div className={styles.journey}><span>Ideas</span><i>→</i><span>Strategy</span><i>→</i><span>Execution</span><i>→</i><span>Growth</span></div>
         </div>
       </div>
-
-      <div className={`${styles.heroFloatCard} ${styles.heroFloatMarketing}`}><HomeOneIcon name="chart"/><div><strong>Marketing</strong><span>Turn attention<br/>into customers.</span></div></div>
-      <div className={`${styles.heroFloatCard} ${styles.heroFloatSales}`}><HomeOneIcon name="people"/><div><strong>Sales</strong><span>Capture, nurture<br/>and convert.</span></div></div>
-      <div className={`${styles.heroFloatCard} ${styles.heroFloatAutomation}`}><HomeOneIcon name="bot"/><div><strong>Automation</strong><span>Let technology<br/>do the work.</span></div></div>
-
-      <aside className={styles.heroRail} aria-label="Sprynt40 growth statement">
-        <p>Brands<br/>People<br/>Businesses<br/>Communities</p>
-        <strong>Grow Loud.</strong><i /><span>A brighter<br/>bolder<br/>tomorrow</span><em>Grow<br/>Loud!</em>
+      <aside className={styles.rail} aria-label="Sprynt40 growth statement">
+        <em className={styles.railScript}>Grow<br/>Loud!</em>
+        <p className={styles.railList}>Brands<br/>People<br/>Businesses<br/>Communities</p>
+        <i className={styles.railRule} />
+        <span className={styles.railTag}>A brighter<br/>bolder<br/>tomorrow</span>
       </aside>
     </section>
   );

@@ -49,6 +49,7 @@ export default function ContactPage() {
         title="Start with the right growth question."
         lead="Tell us where the business is stuck. We will come back within one working day with the cleanest next step for your website, campaigns, CRM or retention path."
         visual="image"
+        size="compact"
         image={{
           src: "/images/page-banners/agency/contact-banner-v2.png",
           alt: "An agency strategist listening to a founder during a discovery meeting",

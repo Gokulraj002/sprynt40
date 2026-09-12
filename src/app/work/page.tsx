@@ -47,6 +47,7 @@ export default function WorkPage() {
         title="Proof of how one growth package comes together."
         lead="Representative build paths for the Sprynt40 model, showing how website, visibility, ads, CRM, retention and reporting connect around one business goal."
         visual="image"
+        size="compact"
         image={{
           src: "/images/page-banners/agency/work-banner-v2.png",
           alt: "An agency strategist presenting campaign performance to clients",

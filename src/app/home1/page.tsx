@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
+import { Section } from "@/components/ui/Section";
+import { hasWhatsApp, waLink } from "@/lib/data/site";
 import { GrowthPlanLab } from "./GrowthPlanLab";
 import styles from "./home1.module.css";
 
@@ -52,6 +56,12 @@ const faqs = [
   ["How do you measure results?", "Your monthly dashboard connects activity to meaningful indicators such as leads, conversion, retention and revenue."],
 ] as const;
 
+const heroSignals = [
+  { value: "14 days", label: "campaign launch window" },
+  { value: "1 metric", label: "weekly decision focus" },
+  { value: "12+", label: "creative tests every month" },
+] as const;
+
 function Icon({ name }: { name: string }) {
   const common = { fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
   const paths: Record<string, React.ReactNode> = {
@@ -81,7 +91,65 @@ function Arrow() {
 export default function HomeOnePage() {
   return (
     <div className={styles.home1Page}>
-      <section className={styles.hero} data-theme="dark">
+      <Section
+        id="hero"
+        theme="dark"
+        className="hidden min-h-svh overflow-hidden pt-24 pb-8 md:flex lg:pt-[7.5rem]"
+      >
+        <Image
+          src="/images/home/hero-command-wall.png"
+          alt="A classical strategist using a laptop inside a panoramic digital marketing command centre"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center saturate-[0.88] hue-rotate-[105deg]"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,8,5,0.48)_0%,rgba(10,8,5,0.2)_35%,rgba(10,8,5,0.72)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(249,115,22,0.28),transparent_28%)]" />
+
+        <Container className="relative z-10 flex flex-1 flex-col">
+          <div className="mx-auto flex max-w-5xl flex-1 flex-col items-center justify-between text-center">
+            <div className="pt-4 sm:pt-8">
+              <p className="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-medium text-white shadow-sm backdrop-blur">
+                Digital growth engineered with AI clarity
+              </p>
+              <h1 className="mx-auto mt-6 max-w-5xl font-display text-[clamp(4rem,7.2vw,6.7rem)] font-semibold leading-[0.98] tracking-normal text-white text-balance">
+                Being visible is not enough. Be measurable.
+              </h1>
+              <p className="mx-auto mt-6 max-w-3xl text-xl leading-8 text-white/72">
+                Sprynt40 builds digital marketing systems where creative, websites, ads and analytics
+                work together to turn attention into qualified growth.
+              </p>
+              <div className="mt-7 flex items-center justify-center gap-3">
+                <Button href="/contact" variant="accent" className="px-7">
+                  Build my growth plan
+                </Button>
+                <Button
+                  href={hasWhatsApp ? waLink("Hi! I want to build a growth plan.") : "/services"}
+                  variant="outline"
+                  external={hasWhatsApp}
+                  className="border-white/25 bg-white/10 px-7 text-white backdrop-blur hover:border-white/60"
+                >
+                  {hasWhatsApp ? "Talk on WhatsApp" : "Explore services"}
+                </Button>
+              </div>
+            </div>
+
+            <div className="w-full pb-6">
+              <div className="mx-auto grid max-w-3xl grid-cols-3 overflow-hidden rounded-full border border-white/15 bg-white/10 text-white shadow-[0_24px_90px_-40px_rgba(249,115,22,0.78)] backdrop-blur-md">
+                {heroSignals.map((item) => (
+                  <div key={item.value} className="border-l border-white/15 px-6 py-4 first:border-l-0">
+                    <p className="font-display text-3xl font-semibold">{item.value}</p>
+                    <p className="mt-1 text-sm text-white/65">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      <section className={`${styles.hero} md:hidden`} data-theme="dark">
         <Image className={styles.heroImage} src="/images/home1/sprynt40-staircase-portal-v2.png" alt="A business leader climbing illuminated steps toward a monumental orange arrow portal" fill priority sizes="100vw" />
         <div className={styles.heroShade} />
         <div className={styles.heroWide}>
